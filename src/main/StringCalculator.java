@@ -8,10 +8,21 @@ public class StringCalculator {
     public static int Add(String numbers) throws Exception {
         numbers = processNumbers(numbers);
         String[] parts = numbers.split(",");
+        LinkedList<String> negNums = new LinkedList<String>();
+
         int sum = 0;
+
         for (String part:parts){
-            sum += processPart(part);
+            try {
+                sum += processPart(part);
+            }
+            catch(IllegalArgumentException i) {
+                negNums.add(i.getMessage());
+            }
         }
+
+        if (!negNums.isEmpty())
+            throw new Exception("Negative Numbers Found : " + String.join(",", negNums));
 
         return sum;
     }
@@ -41,13 +52,13 @@ public class StringCalculator {
         return numbers;
     }
 
-    private static int processPart(String number) throws Exception {
+    private static int processPart(String number) throws IllegalArgumentException {
         if (number.equals(""))
             return 0;
 
         int num = Integer.parseInt(number);
         if (num<0)
-            throw new Exception("negatives not allowed");
+            throw new IllegalArgumentException(String.valueOf(num));
         if (num>1000)
             return 0;
         return num;

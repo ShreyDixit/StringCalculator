@@ -25,7 +25,7 @@ class StringCalculatorTest {
         }
 
         Exception exception1 = assertThrows(Exception.class, () -> {StringCalculator.Add("-1");});
-        assertTrue(exception1.getMessage().contains("negatives not allowed"));
+        assertTrue(exception1.getMessage().contains("Negative Numbers Found : -1"));
 
         assertEquals(0, StringCalculator.Add("5000000"));
 
@@ -39,5 +39,8 @@ class StringCalculatorTest {
         assertEquals(3, StringCalculator.Add("//[***]\n1***2"));
         assertEquals(15, StringCalculator.Add("//[*][;]\n1*2;8*4"));
         assertEquals(15, StringCalculator.Add("//[**][;+]\n1**2;+8**4"));
+
+        Exception exception2 = assertThrows(Exception.class, () -> {StringCalculator.Add("-1,-5\n-10");});
+        assertTrue(exception2.getMessage().contains("Negative Numbers Found : -1,-5,-10"));
     }
 }
