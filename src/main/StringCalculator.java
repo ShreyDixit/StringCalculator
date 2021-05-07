@@ -5,7 +5,20 @@ public class StringCalculator {
         if (numbers.equals(""))
             return 0;
 
-        int num = Integer.parseInt(numbers);
+        String[] parts = numbers.split(",");
+        int sum = 0;
+        for (String part:parts){
+            sum += processPart(part);
+        }
+
+        return sum;
+    }
+
+    private static int processPart(String number) throws Exception {
+        if (number.equals(""))
+            return 0;
+
+        int num = Integer.parseInt(number);
         if (num<0)
             throw new Exception("negatives not allowed");
         if (num>1000)

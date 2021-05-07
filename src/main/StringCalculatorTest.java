@@ -28,5 +28,7 @@ class StringCalculatorTest {
         assertTrue(exception1.getMessage().contains("negatives not allowed"));
 
         assertEquals(0, StringCalculator.Add("5000000"));
+
+        assertEquals(3, StringCalculator.Add("1,2"));
     }
 }
