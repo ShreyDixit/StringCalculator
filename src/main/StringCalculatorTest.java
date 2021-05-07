@@ -38,5 +38,6 @@ class StringCalculatorTest {
 
         assertEquals(3, StringCalculator.Add("//[***]\n1***2"));
         assertEquals(15, StringCalculator.Add("//[*][;]\n1*2;8*4"));
+        assertEquals(15, StringCalculator.Add("//[**][;+]\n1**2;+8**4"));
     }
 }
