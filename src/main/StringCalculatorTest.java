@@ -42,5 +42,11 @@ class StringCalculatorTest {
 
         Exception exception2 = assertThrows(Exception.class, () -> {StringCalculator.Add("-1,-5\n-10");});
         assertTrue(exception2.getMessage().contains("Negative Numbers Found : -1,-5,-10"));
+
+        int runCount = StringCalculator.GetCalledCount();
+        int randNum = rd.nextInt(5000);
+        for(int i=0; i<randNum; i++)
+            StringCalculator.Add("");
+        assertEquals(runCount + randNum, StringCalculator.GetCalledCount());
     }
 }
