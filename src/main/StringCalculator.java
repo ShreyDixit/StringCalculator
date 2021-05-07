@@ -1,5 +1,7 @@
 package main;
 
+import java.util.LinkedList;
+
 public class StringCalculator {
     public static int Add(String numbers) throws Exception {
         numbers = processNumbers(numbers);
@@ -13,15 +15,21 @@ public class StringCalculator {
     }
     
     private static String processNumbers(String numbers) {
-        String delim = "\n";
+        LinkedList<String> delims = new LinkedList<String>();
         if (numbers.length() > 3) {
             if (numbers.substring(0, 2).equals("//")) {
-                delim = numbers.substring(2, 3);
+//                if (numbers.charAt(2)=='[') {
+//
+//                }
+                delims.add(numbers.substring(2, 3));
                 numbers = numbers.substring(numbers.indexOf("\n") + 1);
             }
         }
 
-        numbers = numbers.replaceAll(delim, ",");
+        if (delims.isEmpty())
+            delims.add("\n");
+        for (String delim: delims)
+            numbers = numbers.replaceAll(delim, ",");
         
         return numbers;
     }
