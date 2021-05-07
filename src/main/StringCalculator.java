@@ -16,11 +16,10 @@ public class StringCalculator {
 
         int sum = 0;
 
-        for (String part:parts){
+        for (String part : parts) {
             try {
                 sum += processPart(part);
-            }
-            catch(IllegalArgumentException i) {
+            } catch (IllegalArgumentException i) {
                 negNums.add(i.getMessage());
             }
         }
@@ -30,28 +29,37 @@ public class StringCalculator {
 
         return sum;
     }
-    
+
     private static String processNumbers(String numbers) {
         LinkedList<String> delims = new LinkedList<String>();
-        if (numbers.length() > 3 && numbers.substring(0, 2).equals("//")) {
-            if (numbers.charAt(2)=='[') {
-                Pattern regex = Pattern.compile("\\[(.*?)\\]");
-                Matcher regexMatcher = regex.matcher(numbers);
 
-                while (regexMatcher.find()) {//Finds Matching Pattern in String
-                    delims.add(regexMatcher.group(1));//Fetching Group from String
-                }
-            }
-            delims.add(numbers.substring(2, 3));
+        if (checkDelimiters(numbers)) {
+            getDelimiters(numbers, delims);
             numbers = numbers.substring(numbers.indexOf("\n") + 1);
         }
 
-        if (delims.isEmpty())
-            delims.add("\n");
-        for (String delim: delims)
+        delims.add("\n");
+        for (String delim : delims)
             numbers = numbers.replaceAll(Pattern.quote(delim), ",");
-        
+
         return numbers;
+    }
+
+    private static boolean checkDelimiters(String numbers) {
+        return numbers.length() > 3 && numbers.substring(0, 2).equals("//");
+    }
+
+    private static void getDelimiters(String numbers, LinkedList<String> delims) {
+        if (numbers.charAt(2) == '[') {
+            Pattern regex = Pattern.compile("\\[(.*?)\\]");
+            Matcher regexMatcher = regex.matcher(numbers);
+
+            while (regexMatcher.find()) {//Finds Matching Pattern in String
+                delims.add(regexMatcher.group(1));//Fetching Group from String
+            }
+        }
+
+        delims.add(numbers.substring(2, 3));
     }
 
     private static int processPart(String number) throws IllegalArgumentException {
@@ -59,9 +67,9 @@ public class StringCalculator {
             return 0;
 
         int num = Integer.parseInt(number);
-        if (num<0)
+        if (num < 0)
             throw new IllegalArgumentException(String.valueOf(num));
-        if (num>1000)
+        if (num > 1000)
             return 0;
         return num;
     }
