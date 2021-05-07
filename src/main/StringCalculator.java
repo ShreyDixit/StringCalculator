@@ -2,6 +2,8 @@ package main;
 
 public class StringCalculator {
     public static int Add(String numbers) {
-        return 0;
+        if (numbers.equals(""))
+            return 0;
+        return Integer.parseInt(numbers);
     }
 }
