@@ -5,7 +5,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringCalculator {
+    private static int callCount = 0;
+
     public static int Add(String numbers) throws Exception {
+        callCount++;
+
         numbers = processNumbers(numbers);
         String[] parts = numbers.split(",");
         LinkedList<String> negNums = new LinkedList<String>();
@@ -62,5 +66,9 @@ public class StringCalculator {
         if (num>1000)
             return 0;
         return num;
+    }
+
+    public static int GetCalledCount() {
+        return callCount;
     }
 }
