@@ -34,11 +34,12 @@ public class StringCalculator {
         LinkedList<String> delims = new LinkedList<String>();
 
         if (checkDelimiters(numbers)) {
-            getDelimiters(numbers, delims);
+            delims = getDelimiters(numbers);
             numbers = numbers.substring(numbers.indexOf("\n") + 1);
         }
 
         delims.add("\n");
+
         for (String delim : delims)
             numbers = numbers.replaceAll(Pattern.quote(delim), ",");
 
@@ -49,7 +50,9 @@ public class StringCalculator {
         return numbers.length() > 3 && numbers.substring(0, 2).equals("//");
     }
 
-    private static void getDelimiters(String numbers, LinkedList<String> delims) {
+    private static LinkedList<String> getDelimiters(String numbers) {
+        LinkedList<String> delims = new LinkedList<String>();
+
         if (numbers.charAt(2) == '[') {
             Pattern regex = Pattern.compile("\\[(.*?)\\]");
             Matcher regexMatcher = regex.matcher(numbers);
@@ -60,6 +63,7 @@ public class StringCalculator {
         }
 
         delims.add(numbers.substring(2, 3));
+        return delims;
     }
 
     private static int processPart(String number) throws IllegalArgumentException {
