@@ -35,5 +35,7 @@ class StringCalculatorTest {
         assertEquals(10, StringCalculator.Add("1,2\n3\n4"));
 
         assertEquals(3, StringCalculator.Add("//;\n1;2"));
+
+        assertEquals(3, StringCalculator.Add("//[***]\n1***2"));
     }
 }

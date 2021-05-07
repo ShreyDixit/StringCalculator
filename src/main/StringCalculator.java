@@ -1,6 +1,8 @@
 package main;
 
 import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
     public static int Add(String numbers) throws Exception {
@@ -18,9 +20,14 @@ public class StringCalculator {
         LinkedList<String> delims = new LinkedList<String>();
         if (numbers.length() > 3) {
             if (numbers.substring(0, 2).equals("//")) {
-//                if (numbers.charAt(2)=='[') {
-//
-//                }
+                if (numbers.charAt(2)=='[') {
+                    Pattern regex = Pattern.compile("\\[(.*?)\\]");
+                    Matcher regexMatcher = regex.matcher(numbers);
+
+                    while (regexMatcher.find()) {//Finds Matching Pattern in String
+                        delims.add(regexMatcher.group(1));//Fetching Group from String
+                    }
+                }
                 delims.add(numbers.substring(2, 3));
                 numbers = numbers.substring(numbers.indexOf("\n") + 1);
             }
@@ -29,7 +36,7 @@ public class StringCalculator {
         if (delims.isEmpty())
             delims.add("\n");
         for (String delim: delims)
-            numbers = numbers.replaceAll(delim, ",");
+            numbers = numbers.replaceAll(Pattern.quote(delim), ",");
         
         return numbers;
     }
