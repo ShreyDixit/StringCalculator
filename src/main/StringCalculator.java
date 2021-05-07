@@ -33,19 +33,17 @@ public class StringCalculator {
     
     private static String processNumbers(String numbers) {
         LinkedList<String> delims = new LinkedList<String>();
-        if (numbers.length() > 3) {
-            if (numbers.substring(0, 2).equals("//")) {
-                if (numbers.charAt(2)=='[') {
-                    Pattern regex = Pattern.compile("\\[(.*?)\\]");
-                    Matcher regexMatcher = regex.matcher(numbers);
+        if (numbers.length() > 3 && numbers.substring(0, 2).equals("//")) {
+            if (numbers.charAt(2)=='[') {
+                Pattern regex = Pattern.compile("\\[(.*?)\\]");
+                Matcher regexMatcher = regex.matcher(numbers);
 
-                    while (regexMatcher.find()) {//Finds Matching Pattern in String
-                        delims.add(regexMatcher.group(1));//Fetching Group from String
-                    }
+                while (regexMatcher.find()) {//Finds Matching Pattern in String
+                    delims.add(regexMatcher.group(1));//Fetching Group from String
                 }
-                delims.add(numbers.substring(2, 3));
-                numbers = numbers.substring(numbers.indexOf("\n") + 1);
             }
+            delims.add(numbers.substring(2, 3));
+            numbers = numbers.substring(numbers.indexOf("\n") + 1);
         }
 
         if (delims.isEmpty())
