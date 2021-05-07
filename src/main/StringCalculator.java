@@ -2,9 +2,6 @@ package main;
 
 public class StringCalculator {
     public static int Add(String numbers) throws Exception {
-        if (numbers.equals(""))
-            return 0;
-
         numbers = numbers.replaceAll("\n", ",");
         String[] parts = numbers.split(",");
         int sum = 0;
