@@ -30,5 +30,6 @@ class StringCalculatorTest {
         assertEquals(0, StringCalculator.Add("5000000"));
 
         assertEquals(3, StringCalculator.Add("1,2"));
+        assertEquals(10, StringCalculator.Add("1,2,3,4"));
     }
 }
