@@ -2,7 +2,7 @@ package main;
 
 public class StringCalculator {
     public static int Add(String numbers) throws Exception {
-        numbers = numbers.replaceAll("\n", ",");
+        numbers = processNumbers(numbers);
         String[] parts = numbers.split(",");
         int sum = 0;
         for (String part:parts){
@@ -10,6 +10,20 @@ public class StringCalculator {
         }
 
         return sum;
+    }
+    
+    private static String processNumbers(String numbers) {
+        String delim = "\n";
+        if (numbers.length() > 3) {
+            if (numbers.substring(0, 2).equals("//")) {
+                delim = numbers.substring(2, 3);
+                numbers = numbers.substring(numbers.indexOf("\n") + 1);
+            }
+        }
+
+        numbers = numbers.replaceAll(delim, ",");
+        
+        return numbers;
     }
 
     private static int processPart(String number) throws Exception {
