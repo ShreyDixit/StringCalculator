@@ -31,5 +31,7 @@ class StringCalculatorTest {
 
         assertEquals(3, StringCalculator.Add("1,2"));
         assertEquals(10, StringCalculator.Add("1,2,3,4"));
+
+        assertEquals(10, StringCalculator.Add("1,2\n3\n4"));
     }
 }
