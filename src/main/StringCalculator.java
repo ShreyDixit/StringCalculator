@@ -8,6 +8,8 @@ public class StringCalculator {
         int num = Integer.parseInt(numbers);
         if (num<0)
             throw new Exception("negatives not allowed");
+        if (num>1000)
+            return 0;
         return num;
     }
 }
